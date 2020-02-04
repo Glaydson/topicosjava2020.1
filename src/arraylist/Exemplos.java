@@ -5,7 +5,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toCollection;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
@@ -14,7 +15,7 @@ public class Exemplos {
 	public static void main(String[] args) {
 
 		// CONSTRUTOR DE ARRAYLIST ACEITANDO UMA COLEÇÃO
-		Collection<Integer> numeros = IntStream.range(0, 10).boxed().collect(Collectors.toSet());
+		Collection<Integer> numeros = IntStream.range(0, 10).boxed().collect(toSet());
 		List<Integer> lista1 = new ArrayList<>(numeros);
 		lista1.forEach(System.out::println);
 
@@ -27,7 +28,7 @@ public class Exemplos {
 
 		// PERCORRENDO O ARRAYLIST COM LISTITERATOR
 		List<Integer> lista3 = new ArrayList<>(
-				IntStream.range(0, 10).boxed().collect(Collectors.toCollection(ArrayList::new)));
+				IntStream.range(0, 10).boxed().collect(toCollection(ArrayList::new)));
 		ListIterator<Integer> it = lista3.listIterator(lista3.size());
 		// Criando uma lista com os valores invertidos
 		List<Integer> resultado = new ArrayList<>(lista3.size());
@@ -38,7 +39,7 @@ public class Exemplos {
 
 		// BUSCANDO ELEMENTOS
 		List<String> lista4 = LongStream.range(0, 16).boxed().map(Long::toHexString)
-				.collect(Collectors.toCollection(ArrayList::new));
+				.collect(toCollection(ArrayList::new));
 		List<String> stringsParaBuscar = new ArrayList<>(lista4);
 		stringsParaBuscar.addAll(lista4);
 		stringsParaBuscar.forEach(System.out::println);
@@ -55,7 +56,7 @@ public class Exemplos {
 
 		// REMOVENDO UM ELEMENTO
 		List<Integer> lista5 = new ArrayList<>(
-				IntStream.range(0, 10).boxed().collect(Collectors.toCollection(ArrayList::new)));
+				IntStream.range(0, 10).boxed().collect(toCollection(ArrayList::new)));
 		Collections.reverse(lista5);
 
 		lista5.remove(0);   // Deve remover o número 9, que está no índice 0
